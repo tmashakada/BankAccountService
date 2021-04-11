@@ -33,6 +33,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CustomerController {
     @Autowired
     private CustomerServiceImpl customerServiceImpl; 
+    /**
+     * 
+     * @param customerRequestDto
+     * @return
+     * @throws EntityAlreadyExistsException 
+     */
     @PostMapping("/customer")
     public ResponseEntity<CustomerDto> createCustomer(@Valid @RequestBody CustomerRequestDto customerRequestDto) throws EntityAlreadyExistsException {
           Customer customer = customerServiceImpl.createCustomer(CustomerMapper
@@ -40,6 +46,12 @@ public class CustomerController {
          return new ResponseEntity<>(CustomerMapper.INSTANCE.toCustomerDto(customer), HttpStatus.CREATED);
           
       }
+    /**
+     * 
+     * @param customerId
+     * @return
+     * @throws NoRecordFoundException 
+     */
     @GetMapping("/customer/{customerId}")
     public ResponseEntity<CustomerDto> getCustomer(@PathVariable Long customerId) throws NoRecordFoundException {
        
@@ -47,6 +59,11 @@ public class CustomerController {
 
         return new ResponseEntity<>(CustomerMapper.INSTANCE.toCustomerDto(customer), HttpStatus.OK);
     }
+    /**
+     * 
+     * @return
+     * @throws NoRecordFoundException 
+     */
     @GetMapping("/customers")
     public ResponseEntity<List<CustomerDto>>  getAllCustomer() throws NoRecordFoundException {
        

@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,15 @@ public class TransactionServiceImpl  implements TransactionService{
     private TransactionRepository transactionRepository;
     @Autowired
     private AccountRepository accountRepository;
+    /**
+     * 
+     * @param accountNumber
+     * @param amount
+     * @return
+     * @throws NoRecordFoundException
+     * @throws BankAccountOperationException 
+     */
+    @Transactional
     @Override
     public Transaction deposit(String accountNumber, BigDecimal amount) throws NoRecordFoundException, BankAccountOperationException {
          Account account = accountRepository.findByAccountNumber(accountNumber);
@@ -58,7 +68,16 @@ public class TransactionServiceImpl  implements TransactionService{
         
         return  transactionRepository.saveAndFlush(transcation);
     }
-
+    
+    /**
+     * 
+     * @param accountNumber
+     * @param amount
+     * @return
+     * @throws NoRecordFoundException
+     * @throws BankAccountOperationException 
+     */
+    @Transactional
     @Override
     public Transaction withdraw(String accountNumber, BigDecimal amount) throws NoRecordFoundException, BankAccountOperationException {
           Account withdrawfromaccount = accountRepository.findByAccountNumber(accountNumber);
@@ -87,7 +106,7 @@ public class TransactionServiceImpl  implements TransactionService{
                  transcation.setNewaccountbalance(newCurrentBalance);
                  transcation.setTransactiondate(LocalDateTime.now());
                return    transactionRepository.saveAndFlush(transcation);
-               //  result= "Successful Withdraw Amount "+ amount+" "+ "From Account Number" +accountNumber+" "+" Reference :" +createdtransaction.getTransactionId()+" "+"Balance :"+bal;
+              
          }else{
                 System.out.println("Withdraw from Current Account");
                 BigDecimal maxmumallowedtowithdraw= withdrawfromaccount.getCurrentBalance().add(AccountConstants.CURRENT_ACCOUNT_OVERDRAFT_LIMIT);
@@ -107,11 +126,21 @@ public class TransactionServiceImpl  implements TransactionService{
                   transcation.setTransactiondate(LocalDateTime.now());
                   transcation.setNewaccountbalance(newCurrentBalance);
                   return        transactionRepository.saveAndFlush(transcation);
-               //  result= "Successful Withdraw Amount "+ amount+" "+ "From Account Number" +accountNumber+" "+" Reference :" +createdtransaction.getTransactionId()+" "+"Balance :"+bal;
+             
           }
         // Transaction
     }
-
+    
+    /**
+     * 
+     * @param accountNumberFrom
+     * @param accountNumberTo
+     * @param amount
+     * @return
+     * @throws NoRecordFoundException
+     * @throws BankAccountOperationException 
+     */
+    @Transactional
     @Override
     public Transaction transfer(String accountNumberFrom, String accountNumberTo, BigDecimal amount) throws NoRecordFoundException, BankAccountOperationException {
          Account accountFrom = accountRepository.findByAccountNumber(accountNumberFrom);
@@ -157,8 +186,7 @@ public class TransactionServiceImpl  implements TransactionService{
                  return  savetransactionfrom;      
                              
            
-                // result= "Successful From Transfer Amount "+ amount+" "+ "From Account Number" +savetransactionTo.getAccount().getAccountNumber()
-                      //   +" "+" Reference :" +savetransactionTo.getTransactionId()+" TO "+savetransactionTo.getAccount().getAccountNumber();
+           
          }else{
                 System.out.println("Transfer from Current Account");
                 BigDecimal maxmumallowedtowithdraw= accountFrom.getCurrentBalance().add(AccountConstants.CURRENT_ACCOUNT_OVERDRAFT_LIMIT);
@@ -193,7 +221,7 @@ public class TransactionServiceImpl  implements TransactionService{
                return   createdtransaction;
                              
                    
-              //   result= "Successful Withdraw Amount "+ amount+" "+ "From Account Number" +createdtransaction.getAccount().getAccountNumber()+" "+" Reference :" +createdtransaction.getTransactionId();
+  
           }
         
     }
@@ -204,7 +232,12 @@ public class TransactionServiceImpl  implements TransactionService{
               
         return listallTranscation;
     }
-
+   /***
+    * 
+    * @param transactionid
+    * @return
+    * @throws NoRecordFoundException 
+    */
     @Override
     public Transaction getTransactionsByTransactionId(long transactionid) throws NoRecordFoundException {
         
@@ -215,14 +248,24 @@ public class TransactionServiceImpl  implements TransactionService{
 
    
     
-    
+    /**
+     * 
+     * @param startdate
+     * @param enddate
+     * @return 
+     */
     @Override
     public List<Transaction> getAllTransactionByDateRange(LocalDate startdate, LocalDate enddate) {
         LocalDate newenddate= enddate .plusDays(1);
         List<Transaction> listTranscation=transactionRepository.findAllByTransactiondateBetween(startdate, newenddate);
         return listTranscation;
     }
-
+  /**
+   * 
+   * @param accountNumber
+   * @return
+   * @throws NoRecordFoundException 
+   */
     @Override
     public List<Transaction> getTransactionByAcountNumber(String accountNumber) throws NoRecordFoundException {
        Account account = accountRepository.findByAccountNumber(accountNumber);
@@ -234,7 +277,14 @@ public class TransactionServiceImpl  implements TransactionService{
             List<Transaction> listTranscation=transactionRepository.findByAccountNumber(accountNumber);
         return listTranscation;
     }
-
+    /**
+     * 
+     * @param accountNumber
+     * @param startdate
+     * @param enddate
+     * @return
+     * @throws NoRecordFoundException 
+     */
     @Override
     public List<Transaction> getTransactionByAcountNumberByDate(String accountNumber, LocalDate startdate, LocalDate enddate) throws NoRecordFoundException {
          LocalDate newenddate= enddate .plusDays(1);
