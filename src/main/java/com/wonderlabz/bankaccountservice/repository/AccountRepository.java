@@ -9,11 +9,13 @@ import com.wonderlabz.bankaccountservice.domain.Account;
 import com.wonderlabz.bankaccountservice.domain.AccountType;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author tmashakada email:tmashakada10@gmail.com
- */ 
+ */
+@Repository
 public interface AccountRepository extends JpaRepository<Account, Long>{
     Account findByAccountNumber(String accountNumber);
     List<Account> findByAccountType(AccountType accounttype);

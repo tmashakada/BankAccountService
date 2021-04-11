@@ -12,11 +12,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author tmashakada email:tmashakada10@gmail.com
  */
+@Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long>{
     
     @Query(value = "SELECT * FROM transactionhistory WHERE transactiondate >= :startDate AND transactiondate <= :endDate ",

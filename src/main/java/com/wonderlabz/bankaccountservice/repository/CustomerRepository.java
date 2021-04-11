@@ -7,11 +7,13 @@ package com.wonderlabz.bankaccountservice.repository;
 
 import com.wonderlabz.bankaccountservice.domain.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author tmashakada email:tmashakada10@gmail.com
  */
+@Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     Customer findByNationalId(String nationalId);
 }
