@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * @author tmashakada email:tmashakada10@gmail.com
  */
 public class CustomerDto {
-    private String message;
+   
     private Long id;
     private String firstname;
     private String  surname;
@@ -23,13 +23,9 @@ public class CustomerDto {
     public CustomerDto() {
     }
 
-    public String getMessage() {
-        return message;
-    }
+   
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+   
 
     public Long getId() {
         return id;

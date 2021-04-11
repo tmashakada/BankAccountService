@@ -12,7 +12,7 @@ package com.wonderlabz.bankaccountservice.dto;
 public class CustomerRequestDto {
     
   
-    private String firstname;
+    private String  firstname;
     private String  surname;
     private String  nationalid;
     private String  mobilenumber;

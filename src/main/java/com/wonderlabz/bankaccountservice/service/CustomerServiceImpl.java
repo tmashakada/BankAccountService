@@ -27,9 +27,10 @@ public class CustomerServiceImpl  implements CustomerService{
      * @return
      * @throws EntityAlreadyExistsException 
      */
+    
     @Override
     public Customer createCustomer(Customer customer) throws EntityAlreadyExistsException {
-       Customer cust=customerRepository.findByNationalId(customer.getNationalid());
+       Customer cust=customerRepository.findByNationalid(customer.getNationalid());
        if(cust!=null)
           throw new EntityAlreadyExistsException("Customer Already Exists With National ID: " + customer.getNationalid(),"Customer Already Exists");
          

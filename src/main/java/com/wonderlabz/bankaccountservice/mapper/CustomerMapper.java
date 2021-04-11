@@ -6,10 +6,12 @@
 package com.wonderlabz.bankaccountservice.mapper;
 
 import com.wonderlabz.bankaccountservice.domain.Customer;
-import com.wonderlabz.bankaccountservice.domain.Transaction;
 import com.wonderlabz.bankaccountservice.dto.CustomerDto;
+import com.wonderlabz.bankaccountservice.dto.CustomerRequestDto;
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+import org.springframework.web.bind.annotation.Mapping;
 
 /**
  *
@@ -18,21 +20,11 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface  CustomerMapper {
     CustomerMapper INSTANCE = Mappers.getMapper(CustomerMapper.class);
-    Customer toCustomer(CustomerDto customerDto);
+    Customer toCustomer(CustomerRequestDto customerRequestDto);
 
-   // CustomerDto toCustomerDto(Customer customer);
-    
-    default CustomerDto toCustomerDto(Customer customer) {
-        CustomerDto customerDto = new CustomerDto();
-          customerDto.setCreateddate(customer.getCreatedate());
-          customerDto.setFirstname(customer.getFirstname());
-          customerDto.setId(customer.getId());
-          customerDto.setMessage("Succesful Created New Customer");
-          customerDto.setMobilenumber(customer.getMobilenumber());
-          customerDto.setNationalid(customer.getNationalid());
-          customerDto.setSurname(customer.getSurname());
-      
+    CustomerDto toCustomerDto(Customer customer);
    
-        return customerDto;
-    }
+    List<CustomerDto> toCustomerDtoList(List<Customer> listCustomer);
+    
+   
 }
