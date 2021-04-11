@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import org.hibernate.annotations.NaturalId;
 
 /**
  *
@@ -26,6 +27,7 @@ public class Customer implements Serializable{
     private Long id;
     private String firstname;
     private String  surname;
+    @NaturalId
     @Column(unique=true)
     private String  nationalid;
     private String  mobilenumber;

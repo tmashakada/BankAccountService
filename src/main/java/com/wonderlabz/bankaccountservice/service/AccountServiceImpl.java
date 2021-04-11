@@ -11,11 +11,13 @@ import com.wonderlabz.bankaccountservice.exception.AccountException;
 import com.wonderlabz.bankaccountservice.exception.NoRecordFoundException;
 import java.math.BigDecimal;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author tmashakada email:tmashakada10@gmail.com
  */
+@Service
 public class AccountServiceImpl implements AccountService{
 
     @Override

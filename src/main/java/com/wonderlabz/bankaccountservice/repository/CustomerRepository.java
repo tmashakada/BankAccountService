@@ -13,5 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author tmashakada email:tmashakada10@gmail.com
  */
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-    
+    Customer findByNationalId(String nationalId);
 }
