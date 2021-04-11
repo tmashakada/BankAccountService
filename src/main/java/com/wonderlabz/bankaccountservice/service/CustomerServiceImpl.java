@@ -7,16 +7,21 @@ package com.wonderlabz.bankaccountservice.service;
 
 import com.wonderlabz.bankaccountservice.domain.Customer;
 import com.wonderlabz.bankaccountservice.exception.NoRecordFoundException;
+import com.wonderlabz.bankaccountservice.repository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author tmashakada email:tmashakada10@gmail.com
  */
 public class CustomerServiceImpl  implements CustomerService{
-
+    @Autowired
+    private CustomerRepository customerRepository;
     @Override
     public Customer createCustomer(Customer customer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return null;
+      
     }
 
     @Override

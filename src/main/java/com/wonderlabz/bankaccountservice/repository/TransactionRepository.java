@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.wonderlabz.bankaccountservice.respository;
+package com.wonderlabz.bankaccountservice.repository;
 
 import com.wonderlabz.bankaccountservice.domain.Transaction;
 import java.time.LocalDate;

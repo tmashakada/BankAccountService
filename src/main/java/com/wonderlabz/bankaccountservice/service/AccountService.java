@@ -17,9 +17,9 @@ import java.util.List;
  * @author tmashakada email:tmashakada10@gmail.com
  */
 public interface AccountService {
-     Account openNewAccount(Account account)throws AccountException;
-     Account getAccountByAccountNumber(String accountnumber)throws NoRecordFoundException;
-     List<Account> getAllAccounts();
-     List<Account> getAccountByType(AccountType accounttype);
-     BigDecimal getAccountBalnce(String accountnumber)throws NoRecordFoundException;
+     public Account openNewAccount(Account account)throws AccountException;
+     public Account getAccountByAccountNumber(String accountnumber)throws NoRecordFoundException;
+     public  List<Account> getAllAccounts();
+     public List<Account> getAccountByType(AccountType accounttype);
+     public BigDecimal getAccountBalnce(String accountnumber)throws NoRecordFoundException;
 }

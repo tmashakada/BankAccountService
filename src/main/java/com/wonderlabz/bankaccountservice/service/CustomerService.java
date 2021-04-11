@@ -13,6 +13,6 @@ import com.wonderlabz.bankaccountservice.exception.NoRecordFoundException;
  * @author tmashakada email:tmashakada10@gmail.com
  */
 public interface CustomerService {
-    Customer createCustomer(Customer customer);
-    Customer getById(Long customerid)throws NoRecordFoundException;
+    public Customer createCustomer(Customer customer);
+    public Customer getById(Long customerid)throws NoRecordFoundException;
 }
