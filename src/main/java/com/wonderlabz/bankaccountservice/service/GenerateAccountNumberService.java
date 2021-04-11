@@ -27,12 +27,12 @@ public class GenerateAccountNumberService {
        private static final int RANDOM_UPPER_BOUND = 10;
           
        private static final Random rand = new Random();
-       public String getAccountNumber(Account account){
+       public String getAccountNumber(AccountType accounttype){
           String firstpart=new SimpleDateFormat("yyMMdd").format(Calendar.getInstance().getTime());
           String lastpart=new SimpleDateFormat("mm").format(Calendar.getInstance().getTime());
          
           StringBuilder accountNumber = new StringBuilder();
-          if (Objects.equals(account.getAccountType(), AccountType.SAVINGS)) {
+          if (accounttype.toString().equalsIgnoreCase( AccountType.SAVINGS.toString())) {
                 accountNumber.append(AccountConstants.SAVING_ACCOUNT); 
           }else{
                accountNumber.append(AccountConstants.CURRENT_ACCOUNT);
@@ -45,7 +45,7 @@ public class GenerateAccountNumberService {
           accountNumber.append(lastpart);
         // If the generated account number is in use, try again recursively
         if (accountRepository.existsByAccountNumber(accountNumber.toString())) {
-            return getAccountNumber(account);
+            return getAccountNumber(accounttype);
         }
         
         return   accountNumber.toString();
