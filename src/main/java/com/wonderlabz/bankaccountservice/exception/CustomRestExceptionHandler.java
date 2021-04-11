@@ -5,10 +5,12 @@
  */
 package com.wonderlabz.bankaccountservice.exception;
 
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -116,6 +118,13 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler{
         return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
     }
     
+    @ExceptionHandler(AuthenticationException.class)
+    public  ResponseEntity<Object>  handleAuthenticationException(AuthenticationException ex, HttpServletResponse response){
+     
+        
+        final ApiError apiError = new ApiError(HttpStatus.UNAUTHORIZED, ex.getLocalizedMessage(), "Authentication ERROR");
+        return   new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
       @ExceptionHandler({ Exception.class })
     public ResponseEntity<Object> handleAll(final Exception ex, final WebRequest request) {
         logger.info(ex.getClass().getName());
