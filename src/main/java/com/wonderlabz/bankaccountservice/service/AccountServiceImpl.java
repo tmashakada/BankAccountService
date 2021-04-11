@@ -12,6 +12,7 @@ import com.wonderlabz.bankaccountservice.domain.Customer;
 import com.wonderlabz.bankaccountservice.domain.Transaction;
 import com.wonderlabz.bankaccountservice.domain.TransactionType;
 import com.wonderlabz.bankaccountservice.exception.AccountException;
+import com.wonderlabz.bankaccountservice.exception.EntityAlreadyExistsException;
 import com.wonderlabz.bankaccountservice.exception.NoRecordFoundException;
 import com.wonderlabz.bankaccountservice.repository.AccountRepository;
 import com.wonderlabz.bankaccountservice.repository.CustomerRepository;
@@ -44,7 +45,7 @@ public class AccountServiceImpl implements AccountService{
      
     @Transactional
     @Override
-    public Account openNewAccount(Long customerId, BigDecimal initialDeposit,AccountType accounttype) throws NoRecordFoundException, AccountException{
+    public Account openNewAccount(Long customerId, BigDecimal initialDeposit,AccountType accounttype) throws NoRecordFoundException, AccountException, EntityAlreadyExistsException{
        // Account newaccount= null;
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new NoRecordFoundException("Customer was not found for ID: " + customerId,"Customer Not Found"));
@@ -61,8 +62,10 @@ public class AccountServiceImpl implements AccountService{
                        throw new AccountException("Opening Depost is Below Minimu Depost of "
                                +AccountConstants.SAVINGS_ACCOUNT_OPENING_MINI_DEPOSIT);
                    
-                  
-                   Account newaccount=    accountRepository.saveAndFlush(account);
+                   Account alreadyexits= accountRepository.findByCustomerIdAndAccountType(customer.getId(), accounttype);
+                  if(alreadyexits!=null)   
+                   throw new EntityAlreadyExistsException("Saving Account Already For Customer with  customerid: " + customer.getId(),"Saving Account Already ");
+                 Account newaccount=    accountRepository.saveAndFlush(account);
                    Transaction transaction=new Transaction();
                    transaction.setAccount(newaccount);
                    transaction.setDescription("New Savings Account");
@@ -70,15 +73,18 @@ public class AccountServiceImpl implements AccountService{
                    transaction.setTranscationtype(TransactionType.CREDIT.toString());
                    transaction.setTransactiondate(LocalDateTime.now());
                    transaction.setTransactionamount(initialDeposit);
-                   transactionRepository.saveAndFlush(transaction);
+                 transactionRepository.saveAndFlush(transaction);
                     
                     
                      return newaccount;
                   
               }else{
                     //Creating Cuurent account
-                                         
-                 Account     newaccount=         accountRepository.saveAndFlush(account);
+                        Account alreadyexits= accountRepository.findByCustomerIdAndAccountType(customer.getId(), accounttype);
+                  if(alreadyexits!=null)   
+                   throw new EntityAlreadyExistsException("Current Account Already For Customer with  customerid: " + customer.getId(),"Current Account Already ");                    
+                
+                  Account     newaccount=         accountRepository.saveAndFlush(account);
                    Transaction transaction=new Transaction();
                    transaction.setAccount(newaccount);
                    transaction.setDescription("New Current Account");
