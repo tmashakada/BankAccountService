@@ -29,7 +29,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long>{
                                      
      @Query(value = "SELECT * FROM transactionhistory"
               + "   JOIN account On account.id=transactionhistory.account_id"
-              + "   WHERE account.account_number=:accountNumber AND transactiondate >= :startDate"
+              + "   WHERE account.accountnumber=:accountNumber AND transactiondate >= :startDate"
               + " AND transactiondate <= :endDate", nativeQuery = true)          
      List<Transaction>    findAllByAccountNumberByTransactiondateBetween  (@Param("accountNumber")  String accountNumber,
                                                          @Param("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
@@ -37,7 +37,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long>{
        
      @Query(value = "SELECT * FROM transactionhistory"
               + "   JOIN account On account.id=transactionhistory.account_id"
-              + "   WHERE account.account_number=:accountNumber",
+              + "   WHERE account.accountnumber=:accountNumber",
               nativeQuery = true)
      List<Transaction>    findByAccountNumber (@Param("accountNumber")  String accountNumber );
        

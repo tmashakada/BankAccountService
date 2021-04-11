@@ -5,6 +5,7 @@
  */
 package com.wonderlabz.bankaccountservice.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -39,9 +40,10 @@ public class Account implements Serializable{
     @Column(name = "currentbalance", nullable = false, precision = 18, scale = 2)
     private BigDecimal currentBalance ;
     private LocalDateTime createdate;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "customer_id",nullable = false)
     private Customer customer;
+     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "account")
     private List<Transaction> transactions;
 

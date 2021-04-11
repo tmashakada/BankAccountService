@@ -5,6 +5,7 @@
  */
 package com.wonderlabz.bankaccountservice.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,6 +33,7 @@ public class Customer implements Serializable{
     private String  nationalid;
     private String  mobilenumber;
     private LocalDateTime createdate;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "customer")
     private List<Account> accounts;
 

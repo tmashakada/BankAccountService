@@ -5,6 +5,7 @@
  */
 package com.wonderlabz.bankaccountservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 
 /**
@@ -18,6 +19,7 @@ public class CustomerDto {
     private String  surname;
     private String  nationalid;
     private String  mobilenumber;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createddate;
 
     public CustomerDto() {

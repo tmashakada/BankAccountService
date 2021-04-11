@@ -104,7 +104,7 @@ public class AccountServiceImpl implements AccountService{
         Account account = accountRepository.findByAccountNumber(accountnumber);
             if(account==null) {
                         log.warn("accountRepository.findByAccountNumber: could not find account with accountnumber: " + accountnumber);
-			throw new NoRecordFoundException("Could not find account with accountnumber " + accountnumber);
+			throw new NoRecordFoundException("Could not find account with accountnumber " + accountnumber,"Account Not Found");
             }
         return account;
     }
