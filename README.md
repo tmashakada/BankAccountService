@@ -1,7 +1,16 @@
 REST Endpoints
-
+=============
 
 The following REST endpoints are available upon deployment of the BankAccountService:
+
+REST endpoints are secured using Basic Authentication
+
+For Testing Piurpose
+
+ username:admin
+ 
+ password:admin123
+ 
 
 ### Customer
 -------------
@@ -16,7 +25,7 @@ The following REST endpoints are available upon deployment of the BankAccountSer
 -------------
 | HTTP Verb  | URL | Description |
 | ------------- | ------------- | ------------- |
-|POST | http://localhost:9092/bankaccountservice/api/account |Creates a new Customer
+|POST | http://localhost:9092/bankaccountservice/api/account |Creates a new Account
 | GET  | http://localhost:9092/bankaccountservice/api/accounts |
 | GET  |http://localhost:9092/bankaccountservice/api/accounts/{accountype}  |
 | GET  |http://localhost:9092/bankaccountservice/api/account/{accountnumber}  |
@@ -27,7 +36,7 @@ The following REST endpoints are available upon deployment of the BankAccountSer
 -------------
 | HTTP Verb  | URL | Description |
 | ------------- | ------------- | ------------- |
-|POST |http://localhost:9092/bankaccountservice/api/deposit/{accountnumber} |Creates a new Customer
+|POST |http://localhost:9092/bankaccountservice/api/deposit/{accountnumber} |Deposit
 | POST  |http://localhost:9092/bankaccountservice/api/withdraw/{accountnumber}  |
 | POST  |http://localhost:9092/bankaccountservice/api/transfer/{accounnumberfrom}  |
 | GET    | http://localhost:9092/bankaccountservice/api/transactionhistory |
