@@ -1,8 +1,13 @@
+REST Endpoints
+
+
+The following REST endpoints are available upon deployment of the BankAccountService:
+
 ### Customer
 -------------
 | HTTP Verb  | URL | Description |
 | ------------- | ------------- | ------------- |
-|POST |http://localhost:9092/bankaccountservice/api/customer                |Creates a new Customer
+|POST |http://localhost:9092/bankaccountservice/api/customer                |Creates a new Customer Return Customer Created
 | GET  |http://localhost:9092/bankaccountservice/api/customer/{customerId}        |
 | GET  |http://localhost:9092/bankaccountservice/api/customers  |
 
