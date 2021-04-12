@@ -6,6 +6,7 @@
 package com.wonderlabz.bankaccountservice.service;
 
 import com.wonderlabz.bankaccountservice.domain.Customer;
+import com.wonderlabz.bankaccountservice.exception.CustomerException;
 import com.wonderlabz.bankaccountservice.exception.EntityAlreadyExistsException;
 import com.wonderlabz.bankaccountservice.exception.NoRecordFoundException;
 import com.wonderlabz.bankaccountservice.repository.CustomerRepository;
@@ -26,14 +27,17 @@ public class CustomerServiceImpl  implements CustomerService{
      * @param customer
      * @return
      * @throws EntityAlreadyExistsException 
+     * @throws com.wonderlabz.bankaccountservice.exception.CustomerException 
      */
     
     @Override
-    public Customer createCustomer(Customer customer) throws EntityAlreadyExistsException {
+    public Customer createCustomer(Customer customer) throws EntityAlreadyExistsException,CustomerException {
        Customer cust=customerRepository.findByNationalid(customer.getNationalid());
+       if((customer.getNationalid()==null) && customer.getFirstname()==null && customer.getSurname()==null)
+          throw new CustomerException("Please ENTER ALL Customers Details ","Customer Details Are Null");
        if(cust!=null)
           throw new EntityAlreadyExistsException("Customer Already Exists With National ID: " + customer.getNationalid(),"Customer Already Exists");
-         
+       
        return  customerRepository.saveAndFlush(customer);
       
     }

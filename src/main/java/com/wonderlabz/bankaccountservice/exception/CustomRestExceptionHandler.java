@@ -109,7 +109,7 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler{
       
        return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
     }
-     @ExceptionHandler(BankAccountOperationException.class)
+    @ExceptionHandler(BankAccountOperationException.class)
     protected ResponseEntity<Object> handleBankAccountOperationException(BankAccountOperationException ex) {
      
 
@@ -117,7 +117,16 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler{
       
         return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
     }
+    @ExceptionHandler(  CustomerException.class)
+    protected ResponseEntity<Object> handleCustomerException(  CustomerException ex) {
+     
+
+        ApiError apiError = new ApiError(HttpStatus.FORBIDDEN  ,ex.getError(),ex.getMessage());
+      
+        return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
     
+  
     @ExceptionHandler(AuthenticationException.class)
     public  ResponseEntity<Object>  handleAuthenticationException(AuthenticationException ex, HttpServletResponse response){
      
@@ -125,7 +134,7 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler{
         final ApiError apiError = new ApiError(HttpStatus.UNAUTHORIZED, ex.getLocalizedMessage(), "Authentication ERROR");
         return   new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
     }
-      @ExceptionHandler({ Exception.class })
+    @ExceptionHandler({ Exception.class })
     public ResponseEntity<Object> handleAll(final Exception ex, final WebRequest request) {
         logger.info(ex.getClass().getName());
         logger.error("error", ex);
