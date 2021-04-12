@@ -108,7 +108,8 @@ public class TransactionServiceImpl  implements TransactionService{
                return    transactionRepository.saveAndFlush(transcation);
               
          }else{
-                System.out.println("Withdraw from Current Account");
+            
+                //"Withdraw from Current Account"
                 BigDecimal maxmumallowedtowithdraw= withdrawfromaccount.getCurrentBalance().add(AccountConstants.CURRENT_ACCOUNT_OVERDRAFT_LIMIT);
                 BigDecimal newCurrentBalance= withdrawfromaccount.getCurrentBalance().subtract(amount);
                 System.out.println("New balance C :"+newCurrentBalance+" "+maxmumallowedtowithdraw+ " "+amount);
@@ -286,8 +287,10 @@ public class TransactionServiceImpl  implements TransactionService{
      * @throws NoRecordFoundException 
      */
     @Override
-    public List<Transaction> getTransactionByAcountNumberByDate(String accountNumber, LocalDate startdate, LocalDate enddate) throws NoRecordFoundException {
-         LocalDate newenddate= enddate .plusDays(1);
+    public List<Transaction> getTransactionByAcountNumberByDate(String accountNumber, LocalDate startdate, LocalDate enddate) 
+            throws NoRecordFoundException {
+        
+            LocalDate newenddate= enddate .plusDays(1);
             Account account = accountRepository.findByAccountNumber(accountNumber);
         
          if ( account ==null) 

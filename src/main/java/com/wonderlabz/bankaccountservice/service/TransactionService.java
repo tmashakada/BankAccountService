@@ -24,5 +24,6 @@ public interface TransactionService {
      public Transaction getTransactionsByTransactionId(long transactionid)throws NoRecordFoundException;
      public List<Transaction> getAllTransactionByDateRange( LocalDate startdate, LocalDate enddate);
      public List<Transaction> getTransactionByAcountNumber( String accountNumber)throws NoRecordFoundException;
-     public List<Transaction> getTransactionByAcountNumberByDate( String accountNumber,LocalDate startdate, LocalDate enddate)throws NoRecordFoundException;
+     public List<Transaction> getTransactionByAcountNumberByDate( String accountNumber,LocalDate startdate, LocalDate enddate)
+             throws NoRecordFoundException;
 }

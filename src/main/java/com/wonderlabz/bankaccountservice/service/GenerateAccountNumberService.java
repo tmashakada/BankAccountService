@@ -27,6 +27,11 @@ public class GenerateAccountNumberService {
        private static final int RANDOM_UPPER_BOUND = 10;
           
        private static final Random rand = new Random();
+       /**
+        * 
+        * @param accounttype
+        * @return 
+        */
        public String getAccountNumber(AccountType accounttype){
           String firstpart=new SimpleDateFormat("yyMMdd").format(Calendar.getInstance().getTime());
           String lastpart=new SimpleDateFormat("mm").format(Calendar.getInstance().getTime());

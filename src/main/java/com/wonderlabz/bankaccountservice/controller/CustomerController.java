@@ -8,6 +8,7 @@ package com.wonderlabz.bankaccountservice.controller;
 import com.wonderlabz.bankaccountservice.domain.Customer;
 import com.wonderlabz.bankaccountservice.dto.CustomerDto;
 import com.wonderlabz.bankaccountservice.dto.CustomerRequestDto;
+import com.wonderlabz.bankaccountservice.exception.CustomerException;
 import com.wonderlabz.bankaccountservice.exception.EntityAlreadyExistsException;
 import com.wonderlabz.bankaccountservice.exception.NoRecordFoundException;
 import com.wonderlabz.bankaccountservice.mapper.CustomerMapper;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author tmashakada email:tmashakada10@gmail.com
  */
+@CrossOrigin(origins ="*")
 @RestController
 @RequestMapping("/api")
 public class CustomerController {
@@ -38,11 +41,15 @@ public class CustomerController {
      * @param customerRequestDto
      * @return
      * @throws EntityAlreadyExistsException 
+     * @throws com.wonderlabz.bankaccountservice.exception.CustomerException 
      */
     @PostMapping("/customer")
-    public ResponseEntity<CustomerDto> createCustomer(@Valid @RequestBody CustomerRequestDto customerRequestDto) throws EntityAlreadyExistsException {
+    public ResponseEntity<CustomerDto> createCustomer(@Valid @RequestBody CustomerRequestDto customerRequestDto) 
+            throws EntityAlreadyExistsException, CustomerException {
+        
           Customer customer = customerServiceImpl.createCustomer(CustomerMapper
                  .INSTANCE.toCustomer(customerRequestDto));
+          
          return new ResponseEntity<>(CustomerMapper.INSTANCE.toCustomerDto(customer), HttpStatus.CREATED);
           
       }

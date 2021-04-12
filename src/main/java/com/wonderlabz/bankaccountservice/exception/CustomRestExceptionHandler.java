@@ -62,13 +62,11 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler{
     @Override
      public final ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
              HttpHeaders headers, HttpStatus status, WebRequest request) {
-       // ServletWebRequest servletWebRequest = (ServletWebRequest) request;
+      
       
         String error = "Malformed JSON request";
      
-                    // restException.setPath(request.getDescription(false));
-     
-         //BankApiError apiError =new BankApiError(HttpStatus.BAD_REQUEST,  error,  ex.getLocalizedMessage());
+          
          final ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST,  error,ex.getLocalizedMessage());
          
     return new ResponseEntity<Object>( apiError, new HttpHeaders(), apiError.getStatus());

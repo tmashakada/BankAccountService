@@ -45,8 +45,9 @@ public class AccountServiceImpl implements AccountService{
      
     @Transactional
     @Override
-    public Account openNewAccount(Long customerId, BigDecimal initialDeposit,AccountType accounttype) throws NoRecordFoundException, AccountException, EntityAlreadyExistsException{
-       // Account newaccount= null;
+    public Account openNewAccount(Long customerId, BigDecimal initialDeposit,AccountType accounttype) 
+            throws NoRecordFoundException, AccountException, EntityAlreadyExistsException{
+       
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new NoRecordFoundException("Customer was not found for ID: " + customerId,"Customer Not Found"));
              
@@ -64,7 +65,9 @@ public class AccountServiceImpl implements AccountService{
                    
                    Account alreadyexits= accountRepository.findByCustomerIdAndAccountType(customer.getId(), accounttype);
                   if(alreadyexits!=null)   
-                   throw new EntityAlreadyExistsException("Saving Account Already For Customer with  customerid: " + customer.getId(),"Saving Account Already ");
+                   throw new EntityAlreadyExistsException("Saving Account Already For Customer with  customerid: "
+                           + customer.getId(),"Saving Account Already ");
+                  
                  Account newaccount=    accountRepository.saveAndFlush(account);
                    Transaction transaction=new Transaction();
                    transaction.setAccount(newaccount);
@@ -82,7 +85,8 @@ public class AccountServiceImpl implements AccountService{
                     //Creating Cuurent account
                         Account alreadyexits= accountRepository.findByCustomerIdAndAccountType(customer.getId(), accounttype);
                   if(alreadyexits!=null)   
-                   throw new EntityAlreadyExistsException("Current Account Already For Customer with  customerid: " + customer.getId(),"Current Account Already ");                    
+                   throw new EntityAlreadyExistsException("Current Account Already For Customer with  customerid: " 
+                           + customer.getId(),"Current Account Already ");                    
                 
                   Account     newaccount=         accountRepository.saveAndFlush(account);
                    Transaction transaction=new Transaction();
@@ -104,7 +108,7 @@ public class AccountServiceImpl implements AccountService{
         Account account = accountRepository.findByAccountNumber(accountnumber);
             if(account==null) {
                         log.warn("accountRepository.findByAccountNumber: could not find account with accountnumber: " + accountnumber);
-			throw new NoRecordFoundException("Could not find account with accountnumber " + accountnumber,"Account Not Found");
+	       throw new NoRecordFoundException("Could not find account with accountnumber " + accountnumber,"Account Not Found");
             }
         return account;
     }
@@ -128,8 +132,8 @@ public class AccountServiceImpl implements AccountService{
     public BigDecimal getAccountBalance(String accountnumber) throws NoRecordFoundException {
          Account account = accountRepository.findByAccountNumber(accountnumber);
             if(account==null) {
-                        log.warn("accountRepository.findByAccountNumber: could not find account with accountnumber: " + accountnumber);
-			throw new NoRecordFoundException("Could not find account with accountnumber " + accountnumber,"Account Not Found");
+               log.warn("accountRepository.findByAccountNumber: could not find account with accountnumber: " + accountnumber);
+               throw new NoRecordFoundException("Could not find account with accountnumber " + accountnumber,"Account Not Found");
             }
         return account.getCurrentBalance();
     }
