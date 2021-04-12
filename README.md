@@ -1,30 +1,26 @@
-<dl>
-  <dt>Customer</dt>
-   
-</dl>
 
-<table>
-    <thead>
-      <tr>
-        <th>HTTP Verb</th>
-        <th>URL</th>
-       
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>POST</td>
-            <td>http://localhost:9092/bankaccountservice/api/customer</td>
-            
-        </tr>
-        <tr>
-            <td>GET</td>
-            <td>http://localhost:9092/bankaccountservice/api/customer/{customerId}</td>
-           
-        </tr>
-		      <tr>
-            <td>GET</td>
-            <td>http://localhost:9092/bankaccountservice/api/customers</td>
-       </tr>
-    </tbody>
-	</table>
+
+| HTTP Verb  | URL | Description |
+| ------------- | ------------- | ------------- |
+|POST |http://localhost:9092/bankaccountservice/api/customer                |Creates a new Customer
+| GET  |http://localhost:9092/bankaccountservice/api/customer/{customerId}        |
+| GET  |http://localhost:9092/bankaccountservice/api/customers  |
+
+
+
+| HTTP Verb  | URL | Description |
+| ------------- | ------------- | ------------- |
+|POST | http://localhost:9092/bankaccountservice/api/account |Creates a new Customer
+| GET  | http://localhost:9092/bankaccountservice/api/accounts |
+| GET  |http://localhost:9092/bankaccountservice/api/accounts/{accountype}  |
+| GET  |http://localhost:9092/bankaccountservice/api/account/{accountnumber}  |
+| GET  |http://localhost:9092/bankaccountservice/api/accountbalance/{accountnumber}  |
+
+
+| HTTP Verb  | URL | Description |
+| ------------- | ------------- | ------------- |
+|POST |http://localhost:9092/bankaccountservice/api/deposit/{accountnumber} |Creates a new Customer
+| POST  |http://localhost:9092/bankaccountservice/api/withdraw/{accountnumber}  |
+| POST  |http://localhost:9092/bankaccountservice/api/transfer/{accounnumberfrom}  |
+| GET    | http://localhost:9092/bankaccountservice/api/transactionhistory |
+| GET    | http://localhost:9092/bankaccountservice/api/transactionhistory/{startdate}/{enddate}|
