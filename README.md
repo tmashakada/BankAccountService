@@ -1,5 +1,5 @@
 ### Customer
-
+-------------
 | HTTP Verb  | URL | Description |
 | ------------- | ------------- | ------------- |
 |POST |http://localhost:9092/bankaccountservice/api/customer                |Creates a new Customer
@@ -8,7 +8,7 @@
 
 ### Account
 
-
+-------------
 | HTTP Verb  | URL | Description |
 | ------------- | ------------- | ------------- |
 |POST | http://localhost:9092/bankaccountservice/api/account |Creates a new Customer
@@ -19,7 +19,7 @@
 
 
 ### Transaction
-
+-------------
 | HTTP Verb  | URL | Description |
 | ------------- | ------------- | ------------- |
 |POST |http://localhost:9092/bankaccountservice/api/deposit/{accountnumber} |Creates a new Customer
