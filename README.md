@@ -1,4 +1,4 @@
-
+### Customer
 
 | HTTP Verb  | URL | Description |
 | ------------- | ------------- | ------------- |
@@ -6,6 +6,7 @@
 | GET  |http://localhost:9092/bankaccountservice/api/customer/{customerId}        |
 | GET  |http://localhost:9092/bankaccountservice/api/customers  |
 
+### Account
 
 
 | HTTP Verb  | URL | Description |
@@ -16,6 +17,8 @@
 | GET  |http://localhost:9092/bankaccountservice/api/account/{accountnumber}  |
 | GET  |http://localhost:9092/bankaccountservice/api/accountbalance/{accountnumber}  |
 
+
+### Transaction
 
 | HTTP Verb  | URL | Description |
 | ------------- | ------------- | ------------- |
